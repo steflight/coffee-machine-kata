@@ -13,7 +13,7 @@ function createMyOrder (order, amount) {
         if (isAmountEnough(order.drink, amount)) {
             // amount enough
             let stick = (order.sugar > 0) ? 1 : 0;
-            message = `Drink maker makes 1 ${drinkExists(order.drink)} with ${sugarQuantity(order.sugar)} ${pluralSugar(order.sugar)} and ${stick} stick`;
+            message = `Drink maker makes 1 ${order.drink} with ${sugarQuantity(order.sugar)} ${pluralSugar(order.sugar)} and ${stick} stick`;
             message += "\r\n";
             message += 'Amount of money is correct the drink maker is making your drink :)';
         } else {
