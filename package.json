@@ -1,0 +1,14 @@
+{
+  "name": "kata-coffee-machine",
+  "version": "1.0.0",
+  "description": "This mini project is used to learn Test Driven Development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Stéphane Agoume",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
