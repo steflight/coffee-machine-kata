@@ -22,7 +22,7 @@ function createMyOrder (order, amount) {
             message = 'Warning! You must add ' + complement + ' euro for this ' + order.drink + ' drink';
         }
     } else {
-        message = 'Warning! vous devez entrer un type de boisson supporté par cette Machine (coffee / tea / chocolate)';
+        message = 'Warning! you must enter a type of drink supported by this Machine (coffee / tea / chocolate)';
     }
 
     return message;
@@ -36,7 +36,7 @@ function sugarQuantity(numberOfSugar) {
     if (numberOfSugar == undefined) {
         return 0;
     } else if (numberOfSugar < 0) {
-        throw 'Please enter a valid quantity of su';
+        throw 'Please enter a valid quantity of sugar';
     } else {
         return numberOfSugar;
     }
