@@ -15,7 +15,7 @@ function createOrder(order) {
 
 function drinkExist(drink) {
     if (drink === '' || undefined || null || !drinkList.includes(drink) ) {
-        throw 'Attention! vous devez entrer un type de boisson supporté par cette Machine (coffee / tea / chocolate)';
+        throw 'Attention! you must enter a type of drink supported by this Machine (coffee / tea / chocolate)';
     } else {
       return drink;
     }
@@ -25,7 +25,7 @@ function quantiteSucre(quantiteSucre) {
     if (quantiteSucre === undefined) {
         return 0;
     } else if (quantiteSucre < 0) {
-        throw 'Quantité invalide';
+        throw 'Please enter a valid quantity of sugar';
     } else {
         return quantiteSucre;
     }
