@@ -1,11 +1,15 @@
 let priceList = new Map([
     ['tea', 0.4],
     ['chocolate', 0.5],
-    ['coffee', 0.6]
+    ['coffee', 0.6 ],
+    ['orange juice', 0.6]
   ]);
 
 function createMyOrder (order, amount) {
     let message = '';
+
+    if (order.drink == 'orange juice' && order.extraHot)
+        return 'You can not have an extra hot orange juice';
 
     // check if drink exists
     if (drinkExists(order.drink)) {
@@ -13,7 +17,8 @@ function createMyOrder (order, amount) {
         if (isAmountEnough(order.drink, amount)) {
             // amount enough
             let stick = (order.sugar > 0) ? 1 : 0;
-            message = `Drink maker makes 1 ${drinkExists(order.typeBoisson)} with ${sugarQuantity(order.sugar)} ${pluralSugar(order.sugar)} and ${stick} stick`;
+            let extraHot = !!order.extraHot ? 'extra hot' : ''; 
+            message = `Drink maker makes 1 ${extraHot} ${order.drink} with ${sugarQuantity(order.sugar)} ${pluralSugar(order.sugar)} and ${stick} stick`;
             message += "\r\n";
             message += 'Amount of money is correct the drink maker is making your drink :)';
         } else {
@@ -24,12 +29,11 @@ function createMyOrder (order, amount) {
     } else {
         message = 'Warning! vous devez entrer un type de boisson supporté par cette Machine (coffee / tea / chocolate)';
     }
-
     return message;
 }
 
 function drinkExists(drink) {
-    return !!drink && priceList.has(drink); // truthy ou truthiness
+    return !!drink && priceList.has(drink);
 }
 
 function sugarQuantity(numberOfSugar) {
@@ -50,7 +54,8 @@ function isAmountEnough (drink, amount) {
     return amount >= priceList.get(drink);
 }
 
-// console.log(createMyOrder({ drink: 'coffee', sugar:-2 }, 0.7));
+
+console.log(createMyOrder({ drink: 'orange juice', sugar: 2, extraHot: true }, 0.6));
 
 module.exports = {
     "drinkExists": drinkExists,
