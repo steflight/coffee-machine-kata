@@ -6,7 +6,7 @@ function createOrder(order) {
     let message = '';
 
     try {
-        message = `Drink maker makes 1 ${drinkExist(order.drink)} with ${quantiteSucre(order.sugar)} ${plurielSugar(order.sugar)} and ${stick} stick`;
+        message = `Drink maker makes 1 ${drinkExist(order.drink)} with ${sugarQuantity(order.sugar)} ${plurielSugar(order.sugar)} and ${stick} stick`;
     } catch (e) {
         message = e;
     }
@@ -21,18 +21,18 @@ function drinkExist(drink) {
     }
 }
 
-function quantiteSucre(quantiteSucre) {
-    if (quantiteSucre === undefined) {
+function sugarQuantity(numberOfSugar) {
+    if (numberOfSugar === undefined) {
         return 0;
-    } else if (quantiteSucre < 0) {
+    } else if (numberOfSugar < 0) {
         throw 'Please enter a valid quantity of sugar';
     } else {
-        return quantiteSucre;
+        return numberOfSugar;
     }
 }
 
-function plurielSugar(quantiteSucre) {
-    return quantiteSucre <= 1 ? 'sugar' : 'sugars';
+function plurielSugar(numberOfSugar) {
+    return numberOfSugar <= 1 ? 'sugar' : 'sugars';
 }
 
-console.log(createOrder({ drink: 'chocolte', sugar: undefined }));
+console.log(createOrder({ drink: 'chocolate', sugar: 2 }));
