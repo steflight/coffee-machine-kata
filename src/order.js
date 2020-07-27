@@ -55,7 +55,7 @@ function isAmountEnough (drink, amount) {
 }
 
 
-console.log(createMyOrder({ drink: 'orange juice', sugar: 2, extraHot: true }, 0.6));
+// console.log(createMyOrder({ drink: 'orange juice', sugar: 2, extraHot: true }, 0.6));
 
 module.exports = {
     "drinkExists": drinkExists,
