@@ -1,44 +1,61 @@
-let order = {
-    type: '',
-    sugar: 0,
-    stick: 0
-};
+let priceList = new Map([
+    ['tea', 0.4],
+    ['chocolate', 0.5],
+    ['coffee', 0.6]
+  ]);
 
-let listeBoissons = ['tea', 'chocolate', 'coffee'];
-
-function createOrder(commande) {
-
-    let stick = (commande.sugar > 0) ? 1 : 0;
+function createMyOrder (order, amount) {
     let message = '';
 
-    try {
-        message = `Drink maker makes 1 ${boissonExist(commande.typeBoisson)} with ${quantiteSucre(commande.sugar)} ${plurielSugar(commande.sugar)} and ${stick} stick`;
-    } catch (e) {
-        message = e;
+    // check if drink exists
+    if (drinkExists(order.drink)) {
+        // check if the amount provided is valid
+        if (isAmountEnough(order.drink, amount)) {
+            // amount enough
+            let stick = (order.sugar > 0) ? 1 : 0;
+            message = `Drink maker makes 1 ${drinkExists(order.typeBoisson)} with ${sugarQuantity(order.sugar)} ${pluralSugar(order.sugar)} and ${stick} stick`;
+            message += "\r\n";
+            message += 'Amount of money is correct the drink maker is making your drink :)';
+        } else {
+            // insufficient amount
+            let complement = (priceList.get(order.drink) - (amount > 0 ? amount : 0)).toFixed(2);
+            message = 'Warning! You must add ' + complement + ' euro for this ' + order.drink + ' drink';
+        }
+    } else {
+        message = 'Warning! vous devez entrer un type de boisson supporté par cette Machine (coffee / tea / chocolate)';
     }
+
     return message;
 }
 
-function boissonExist(typeBoisson) {
-    if (typeBoisson === '' || undefined || null || !listeBoissons.includes(typeBoisson) ) {
-        throw 'Attention! vous devez entrer un type de boisson supporté par cette Machine (coffee / tea / chocolate)';
-    } else {
-      return typeBoisson;
-    }
+function drinkExists(drink) {
+    return !!drink && priceList.has(drink); // truthy ou truthiness
 }
 
-function quantiteSucre(quantiteSucre) {
-    if (quantiteSucre === undefined) {
+function sugarQuantity(numberOfSugar) {
+    if (numberOfSugar == undefined) {
         return 0;
-    } else if (quantiteSucre < 0) {
-        throw 'Quantité invalide';
+    } else if (numberOfSugar < 0) {
+        throw 'Please enter a valid quantity of su';
     } else {
-        return quantiteSucre;
+        return numberOfSugar;
     }
 }
 
-function plurielSugar(quantiteSucre) {
-    return quantiteSucre <= 1 ? 'sugar' : 'sugars';
+function pluralSugar (numberOfSugar) {
+    return numberOfSugar <= 1 ? 'sugar' : 'sugars';
 }
 
-console.log(createOrder({ typeBoisson: 'chocolate', sugar: undefined }));
+function isAmountEnough (drink, amount) {
+    return amount >= priceList.get(drink);
+}
+
+// console.log(createMyOrder({ drink: 'coffee', sugar:-2 }, 0.7));
+
+module.exports = {
+    "drinkExists": drinkExists,
+    "isAmountEnough": isAmountEnough,
+    "createMyOrder": createMyOrder,
+    "sugarQuantity": sugarQuantity
+};
+
